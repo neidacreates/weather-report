@@ -1,5 +1,14 @@
 # Weather Report
 
+## Neida/Lisa Group Notes
+
+- Neida EST/Lisa PST
+- not before Ada roundtables
+- N free 7PM EST/4PM PST
+- work on the weekend together and Thursday morning
+- keep HTML/CSS simple
+- let's not shoot for deployment for now
+
 ## Skills Assessed
 
 - Following directions and reading comprehension
