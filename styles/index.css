@@ -1,0 +1,13 @@
+body {
+    background-color: skyblue;
+}
+
+
+
+#inputButtons {
+    font-family: sans-serif;
+    color: white;
+    text-align: center;
+    border-radius: 10em;
+    padding: .5em;
+}
