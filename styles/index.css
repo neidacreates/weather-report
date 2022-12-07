@@ -2,12 +2,30 @@ body {
     background-color: skyblue;
 }
 
-
-
 #inputButtons {
     font-family: sans-serif;
     color: white;
     text-align: center;
     border-radius: 10em;
     padding: .5em;
+}
+
+.textRed {
+    color: red;
+}
+
+.textOrange {
+    color: orange;
+}
+
+.textYellow {
+    color: yellow;
+}
+
+.textGreen {
+    color: green;
+}
+
+.textTeal {
+    color: teal;
 }
