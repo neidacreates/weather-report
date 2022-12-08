@@ -5,6 +5,14 @@ const landscapeElemt = document.getElementById('emojiScene');
 const state = {
   tempText: 80,
   scene: '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂',
+  city: 'Seattle',
+};
+// ----- CHANGING CITY NAME ----- //
+const changeCityName = () => {
+  const cityNameInput = document.getElementById('cityNameInput').value;
+  const cityName = document.getElementById('cityName');
+  state.city = cityNameInput;
+  cityName.textContent = state.city;
 };
 
 // ----- CHANGING STATES BY TEMPERATURE ----- //
@@ -79,6 +87,9 @@ const registerEventHandlers = () => {
 
   const decreaseTempButton = document.getElementById('tempDecrease');
   decreaseTempButton.addEventListener('click', decreaseTemp);
+
+  const changeCityButton = document.getElementById('cityNameReset');
+  changeCityButton.addEventListener('click', changeCityName);
 };
 
 // ----- SETTING SO DOM LOADS BEFORE JS ----- //
