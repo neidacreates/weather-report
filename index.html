@@ -7,20 +7,35 @@
     <link rel="stylesheet" type="text/css" href="/styles/index.css"/>
     <title>Weather Report</title>
 </head>
+
 <body>
-    <h1 id="pageHeader">The weather in city is:</h1>
+    <h1 id="pageHeader">The weather today is:</h1>
     <section id="inputButtons">
         <h2>City Name</h2>
         <input type="text" id="cityNameInput" value="Seattle">
-        <button id="cityNameReset" class="city-name__reset-btn">Reset</button>
+        <button id="cityNameReset">Reset City</button>
     </section>
 
-    <section id="userMods">
-        <h2 id="tempHeading">Temperature in F</h2>
-        <h3 id="tempText">80</h3>
-        <button id="tempIncrease">⬆️</button>
-        <button id="tempDecrease">⬇️</button>
-        
+    <section class="flexContainer">
+        <section id="userMods" class="flexItem">
+            <h2 id="tempHeading">Temperature (ºF)</h2>
+            <h3 id="tempText">80</h3>
+            <button id="tempIncrease">⬆️</button>
+            <button id="tempDecrease">⬇️</button>
+            <h2 id="landscapeHeading">Choose a scene:</h2>
+            <select id="landscapeSelect">
+                <option>Sunny</option>
+                <option>Cloudy</option>
+                <option>Rainy</option>
+                <option>Windy</option>
+                <option>Snowy</option>
+            </select>
+        </section>
+
+        <section id="landscapeScene" class="flexItem">
+            <img alt="picture of an open window looking out" src="/assets/transparentWindow.png" id="windowPhoto">
+            <div id="emojiScene">🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂</div>
+        </section>
     </section>
 
     <script src="./node_modules/axios/dist/axios.min.js"></script>

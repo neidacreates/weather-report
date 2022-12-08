@@ -2,12 +2,44 @@ body {
     background-color: skyblue;
 }
 
+h3 {
+    font-size: 3em;
+    align-self: center;
+}
+
+span {
+    display:none;
+}
+
 #inputButtons {
     font-family: sans-serif;
-    color: white;
+    color: midnightblue;
     text-align: center;
     border-radius: 10em;
     padding: .5em;
+}
+
+#windowPhoto {
+    height: auto;
+    width: 50vw;
+}
+
+.flexContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    background-color: beige;
+}
+
+.flexItem {
+    display: flex;
+    flex-flow: column;
+    background-color: lavender;
+    align-self: center;
+    /* align-items: center; */
+    padding: 1em;
+    border-radius: 3em;
+
 }
 
 .textRed {
@@ -28,4 +60,24 @@ body {
 
 .textTeal {
     color: teal;
+}
+
+.sunny {
+    display: block;
+}
+
+.cloudy {
+    display: block;
+}
+
+.rainy {
+    display: block;
+}
+
+.windy {
+    display: block;
+}
+
+.snowy {
+    display: block;
 }
