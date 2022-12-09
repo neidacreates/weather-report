@@ -88,8 +88,8 @@ const registerEventHandlers = () => {
   const decreaseTempButton = document.getElementById('tempDecrease');
   decreaseTempButton.addEventListener('click', decreaseTemp);
 
-  const changeCityButton = document.getElementById('cityNameReset');
-  changeCityButton.addEventListener('click', changeCityName);
+  const changeCityInput = document.getElementById('cityNameInput');
+  changeCityInput.addEventListener('input', changeCityName);
 };
 
 // ----- SETTING SO DOM LOADS BEFORE JS ----- //
