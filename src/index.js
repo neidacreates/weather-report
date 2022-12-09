@@ -33,7 +33,7 @@ const changeCityName = () => {
 
 // ----- CHANGING TEMPERATURE COLOR ----- //
 const colorChange = () => {
-  currentTempElemt.removeAttribute('style');
+  currentTempElemt.removeAttribute('class');
   if (state.tempText >= 80) {
     currentTempElemt.classList.add('textRed');
   } else if (79 >= state.tempText && state.tempText >= 70) {
