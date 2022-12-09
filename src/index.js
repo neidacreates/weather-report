@@ -7,6 +7,8 @@ const state = {
   tempText: 80,
   scene: '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂',
   city: 'Seattle',
+  lat: 47.608013,
+  lon: -122.335167,
 };
 // ----- CHANGING CITY NAME ----- //
 const changeCityName = () => {
@@ -14,6 +16,32 @@ const changeCityName = () => {
   const cityName = document.getElementById('cityName');
   state.city = cityNameInput;
   cityName.textContent = state.city;
+};
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const getWeather = async () => {
+  await wait(1000);
+  return axios
+    .get('http://127.0.0.1:5000/weather', {
+      params: {
+        lat: state.lat,
+        lon: state.lon,
+      },
+    })
+    .then((response) => {
+      let currentTemp = response.data.main.temp;
+      currentTemp = Math.round((currentTemp - 273.15) * 1.8 + 32.0);
+      state.tempText = currentTemp;
+      console.log(response);
+      console.log(currentTemp);
+      return currentTemp;
+    })
+    .catch((error) => {
+      console.log('error in getWeather');
+      console.log('error:', error);
+      console.log('error response:', error.response);
+    });
 };
 
 const findLatitudeAndLongitude = () => {
@@ -27,6 +55,8 @@ const findLatitudeAndLongitude = () => {
     .then((response) => {
       const latitude = response.data[0].lat;
       const longitude = response.data[0].lon;
+      state.lat = latitude;
+      state.lon = longitude;
       console.log(latitude, longitude);
       return { latitude, longitude };
     })
@@ -37,6 +67,13 @@ const findLatitudeAndLongitude = () => {
     });
 };
 
+const changeTempText = async () => {
+  await wait(3000);
+  // state.tempText = currentTemp;
+  currentTempElemt.textContent = state.tempText;
+  landscapeChange();
+  colorChange();
+};
 // ----- CHANGING STATES BY TEMPERATURE ----- //
 // const tempChange = (element, style1, style2, style3, style4, style5) => {
 //   element.removeAttribute('style');
@@ -114,7 +151,11 @@ const registerEventHandlers = () => {
   changeCityInput.addEventListener('input', changeCityName);
 
   const changeTempButton = document.getElementById('getWeather');
-  changeTempButton.addEventListener('click', findLatitudeAndLongitude);
+  changeTempButton.addEventListener('click', () => {
+    findLatitudeAndLongitude();
+    getWeather();
+    changeTempText();
+  });
 };
 
 // ----- SETTING SO DOM LOADS BEFORE JS ----- //
