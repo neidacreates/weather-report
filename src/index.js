@@ -1,4 +1,5 @@
 'use strict';
+
 const currentTempElemt = document.getElementById('tempText');
 const landscapeElemt = document.getElementById('emojiScene');
 
@@ -13,6 +14,27 @@ const changeCityName = () => {
   const cityName = document.getElementById('cityName');
   state.city = cityNameInput;
   cityName.textContent = state.city;
+};
+
+const findLatitudeAndLongitude = () => {
+  return axios
+    .get('http://127.0.0.1:5000/location', {
+      params: {
+        q: state.city,
+        format: 'json',
+      },
+    })
+    .then((response) => {
+      const latitude = response.data[0].lat;
+      const longitude = response.data[0].lon;
+      console.log(latitude, longitude);
+      return { latitude, longitude };
+    })
+    .catch((error) => {
+      console.log('error in findLatitudeAndLongitude!');
+      console.log('error:', error);
+      console.log('error response:', error.response);
+    });
 };
 
 // ----- CHANGING STATES BY TEMPERATURE ----- //
@@ -90,6 +112,9 @@ const registerEventHandlers = () => {
 
   const changeCityInput = document.getElementById('cityNameInput');
   changeCityInput.addEventListener('input', changeCityName);
+
+  const changeTempButton = document.getElementById('getWeather');
+  changeTempButton.addEventListener('click', findLatitudeAndLongitude);
 };
 
 // ----- SETTING SO DOM LOADS BEFORE JS ----- //
