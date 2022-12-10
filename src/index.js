@@ -1,7 +1,7 @@
 'use strict';
-
 const currentTempElemt = document.getElementById('tempText');
-const landscapeElemt = document.getElementById('emojiScene');
+const landscapeElemt = document.getElementById('landscapeScene');
+const skyElemt = document.getElementById('skyScene');
 
 const state = {
   tempText: 80,
@@ -9,6 +9,8 @@ const state = {
   city: 'Seattle',
   lat: 47.608013,
   lon: -122.335167,
+  sky: '☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️',
+  skySelect: 'Sunny',
 };
 // ----- CHANGING CITY NAME ----- //
 const changeCityName = () => {
@@ -68,7 +70,7 @@ const findLatitudeAndLongitude = () => {
 };
 
 const changeTempText = async () => {
-  await wait(3000);
+  await wait(2000);
   // state.tempText = currentTemp;
   currentTempElemt.textContent = state.tempText;
   landscapeChange();
@@ -139,6 +141,26 @@ const landscapeChange = () => {
   landscapeElemt.textContent = state.scene;
 };
 
+// ----- CHANGING SKY SCENE ----- //
+
+const skyChange = () => {
+  state.skySelect = document.getElementById('skySelect').value;
+  console.log(state.skySelect);
+  if (state.skySelect === 'Sunny') {
+    state.sky = '☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️';
+  } else if (state.skySelect === 'Cloudy') {
+    state.sky = '☁️ ☁️☁️🌤️☁️ ☁️☁️☁️ ☁️☁️';
+  } else if (state.skySelect === 'Rainy') {
+    state.sky = '🌧🌈🌧🌧💧🌧🌦🌧💧🌧🌧';
+  } else if (state.skySelect === 'Windy') {
+    state.sky = '💨🍃🌬️💨🍃🌬️💨🍃🌬️💨🍃';
+  } else {
+    state.sky = '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
+  }
+
+  skyElemt.textContent = state.sky;
+};
+
 // ----- REGISTERING EVENT HANDLERS ----- //
 const registerEventHandlers = () => {
   const increaseTempButton = document.getElementById('tempIncrease');
@@ -156,6 +178,9 @@ const registerEventHandlers = () => {
     getWeather();
     changeTempText();
   });
+
+  const changeSkySelect = document.getElementById('skySelect');
+  changeSkySelect.addEventListener('change', skyChange);
 };
 
 // ----- SETTING SO DOM LOADS BEFORE JS ----- //
