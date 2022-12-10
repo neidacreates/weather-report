@@ -2,6 +2,7 @@
 const currentTempElemt = document.getElementById('tempText');
 const landscapeElemt = document.getElementById('landscapeScene');
 const skyElemt = document.getElementById('skyScene');
+const cityName = document.getElementById('cityName');
 
 const state = {
   tempText: 80,
@@ -12,14 +13,22 @@ const state = {
   sky: '☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️',
   skySelect: 'Sunny',
 };
+
 // ----- CHANGING CITY NAME ----- //
 const changeCityName = () => {
   const cityNameInput = document.getElementById('cityNameInput').value;
-  const cityName = document.getElementById('cityName');
   state.city = cityNameInput;
   cityName.textContent = state.city;
 };
 
+// ----- RESETTING CITY NAME ----- //
+const resetCityName = () => {
+  state.city = 'Seattle';
+  cityName.textContent = state.city;
+  document.getElementById('cityNameInput').value = state.city;
+};
+
+// ----- GETTING WEATHER INFO ----- //
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const getWeather = async () => {
@@ -181,6 +190,9 @@ const registerEventHandlers = () => {
 
   const changeSkySelect = document.getElementById('skySelect');
   changeSkySelect.addEventListener('change', skyChange);
+
+  const resetCityButton = document.getElementById('cityNameReset');
+  resetCityButton.addEventListener('click', resetCityName);
 };
 
 // ----- SETTING SO DOM LOADS BEFORE JS ----- //
