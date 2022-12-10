@@ -68,7 +68,6 @@ span {
     flex-flow: column;
     background-color: lavender;
     align-self: center;
-    /* align-items: center; */
     padding: 1em;
     border-radius: 3em;
 }
