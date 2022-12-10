@@ -12,6 +12,7 @@ const state = {
   lon: -122.335167,
   sky: '☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️',
   skySelect: 'Sunny',
+  weatherIcon: '',
 };
 
 // ----- CHANGING CITY NAME ----- //
@@ -44,8 +45,10 @@ const getWeather = async () => {
       let currentTemp = response.data.main.temp;
       currentTemp = Math.round((currentTemp - 273.15) * 1.8 + 32.0);
       state.tempText = currentTemp;
+      state.weatherIcon = response.data.weather[0].icon;
       console.log(response);
       console.log(currentTemp);
+      console.log(state.weatherIcon);
       return currentTemp;
     })
     .catch((error) => {
@@ -84,6 +87,7 @@ const changeTempText = async () => {
   currentTempElemt.textContent = state.tempText;
   landscapeChange();
   colorChange();
+  skyChange();
 };
 // ----- CHANGING STATES BY TEMPERATURE ----- //
 // const tempChange = (element, style1, style2, style3, style4, style5) => {
@@ -142,9 +146,9 @@ const landscapeChange = () => {
   } else if (69 >= state.tempText && state.tempText >= 60) {
     state.scene = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
   } else if (59 >= state.tempText && state.tempText >= 50) {
-    state.scene = '💨🍃🌬️💨🍃🌬️💨🍃🌬️💨🍃🌬️';
+    state.scene = '🍁🍂🍁🍂🍁🍂🍁🍂🍁🍂🍁🍂🍁';
   } else {
-    state.scene = '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲';
+    state.scene = '🌲❄️🌲⛄️🌲❄️⛄️🌲🌲❄️⛄️🌲❄️';
   }
 
   landscapeElemt.textContent = state.scene;
@@ -155,13 +159,26 @@ const landscapeChange = () => {
 const skyChange = () => {
   state.skySelect = document.getElementById('skySelect').value;
   console.log(state.skySelect);
-  if (state.skySelect === 'Sunny') {
-    state.sky = '☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️';
-  } else if (state.skySelect === 'Cloudy') {
+  if (
+    state.skySelect === 'Sunny' ||
+    state.weatherIcon.includes('01') ||
+    state.weatherIcon.includes('02')
+  ) {
+    state.sky = '☁️☁️ ☁️ ☁️☁️ ☁️ ☀️☁️ ☁️☁️';
+  } else if (
+    state.skySelect === 'Cloudy' ||
+    state.weatherIcon.includes('03') ||
+    state.weatherIcon.includes('04')
+  ) {
     state.sky = '☁️ ☁️☁️🌤️☁️ ☁️☁️☁️ ☁️☁️';
-  } else if (state.skySelect === 'Rainy') {
+  } else if (
+    state.skySelect === 'Rainy' ||
+    state.weatherIcon.includes('09') ||
+    state.weatherIcon.includes('10') ||
+    state.weatherIcon.includes('11')
+  ) {
     state.sky = '🌧🌈🌧🌧💧🌧🌦🌧💧🌧🌧';
-  } else if (state.skySelect === 'Windy') {
+  } else if (state.skySelect === 'Windy' || state.weatherIcon.includes('50')) {
     state.sky = '💨🍃🌬️💨🍃🌬️💨🍃🌬️💨🍃';
   } else {
     state.sky = '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
