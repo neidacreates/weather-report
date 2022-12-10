@@ -3,6 +3,7 @@ const currentTempElemt = document.getElementById('tempText');
 const landscapeElemt = document.getElementById('landscapeScene');
 const skyElemt = document.getElementById('skyScene');
 const cityName = document.getElementById('cityName');
+const conditionText = document.getElementById('conditionText');
 
 const state = {
   tempText: 80,
@@ -10,9 +11,10 @@ const state = {
   city: 'Seattle',
   lat: 47.608013,
   lon: -122.335167,
-  sky: '☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️',
+  sky: '☁️☁️ ☁️ ☁️☁️ ☁️ ☀️☁️ ☁️☁️',
   skySelect: 'Sunny',
   weatherIcon: '',
+  condition: '',
 };
 
 // ----- CHANGING CITY NAME ----- //
@@ -46,6 +48,7 @@ const getWeather = async () => {
       currentTemp = Math.round((currentTemp - 273.15) * 1.8 + 32.0);
       state.tempText = currentTemp;
       state.weatherIcon = response.data.weather[0].icon;
+      state.condition = response.data.weather[0].description;
       console.log(response);
       console.log(currentTemp);
       console.log(state.weatherIcon);
@@ -83,27 +86,12 @@ const findLatitudeAndLongitude = () => {
 
 const changeTempText = async () => {
   await wait(2000);
-  // state.tempText = currentTemp;
   currentTempElemt.textContent = state.tempText;
+  conditionText.textContent = state.condition;
   landscapeChange();
   colorChange();
-  skyChange();
+  skyChangeByWeather();
 };
-// ----- CHANGING STATES BY TEMPERATURE ----- //
-// const tempChange = (element, style1, style2, style3, style4, style5) => {
-//   element.removeAttribute('style');
-//   if (state.tempText >= 80) {
-//     element.classList.add(`${style1}`);
-//   } else if (79 >= state.tempText && state.tempText >= 70) {
-//     element.classList.add(`${style2}`);
-//   } else if (69 >= state.tempText && state.tempText >= 60) {
-//     element.classList.add(`${style3}`);
-//   } else if (59 >= state.tempText && state.tempText >= 50) {
-//     element.classList.add(`${style4}`);
-//   } else {
-//     element.classList.add(`${style5}`);
-//   }
-// };
 
 // ----- CHANGING TEMPERATURE COLOR ----- //
 const colorChange = () => {
@@ -155,33 +143,48 @@ const landscapeChange = () => {
 };
 
 // ----- CHANGING SKY SCENE ----- //
+const sunny = '☁️☁️ ☁️ ☁️☁️ ☁️ ☀️☁️ ☁️☁️';
+const cloudy = '☁️ ☁️☁️🌤️☁️ ☁️☁️☁️ ☁️☁️';
+const rainy = '🌧🌈🌧🌧💧🌧🌦🌧💧🌧🌧';
+const windy = '💨🍃🌬️💨🍃🌬️💨🍃🌬️💨🍃';
+const snowy = '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
 
 const skyChange = () => {
   state.skySelect = document.getElementById('skySelect').value;
   console.log(state.skySelect);
-  if (
-    state.skySelect === 'Sunny' ||
-    state.weatherIcon.includes('01') ||
-    state.weatherIcon.includes('02')
-  ) {
-    state.sky = '☁️☁️ ☁️ ☁️☁️ ☁️ ☀️☁️ ☁️☁️';
+  if (state.skySelect === 'Sunny') {
+    state.sky = sunny;
+  } else if (state.skySelect === 'Cloudy') {
+    state.sky = cloudy;
+  } else if (state.skySelect === 'Rainy') {
+    state.sky = rainy;
+  } else if (state.skySelect === 'Windy') {
+    state.sky = windy;
+  } else {
+    state.sky = snowy;
+  }
+
+  skyElemt.textContent = state.sky;
+};
+
+const skyChangeByWeather = () => {
+  if (state.weatherIcon.includes('01') || state.weatherIcon.includes('02')) {
+    state.sky = sunny;
   } else if (
-    state.skySelect === 'Cloudy' ||
     state.weatherIcon.includes('03') ||
     state.weatherIcon.includes('04')
   ) {
-    state.sky = '☁️ ☁️☁️🌤️☁️ ☁️☁️☁️ ☁️☁️';
+    state.sky = cloudy;
   } else if (
-    state.skySelect === 'Rainy' ||
     state.weatherIcon.includes('09') ||
     state.weatherIcon.includes('10') ||
     state.weatherIcon.includes('11')
   ) {
-    state.sky = '🌧🌈🌧🌧💧🌧🌦🌧💧🌧🌧';
-  } else if (state.skySelect === 'Windy' || state.weatherIcon.includes('50')) {
-    state.sky = '💨🍃🌬️💨🍃🌬️💨🍃🌬️💨🍃';
+    state.sky = rainy;
+  } else if (state.weatherIcon.includes('50')) {
+    state.sky = windy;
   } else {
-    state.sky = '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
+    state.sky = snowy;
   }
 
   skyElemt.textContent = state.sky;

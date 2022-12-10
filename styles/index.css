@@ -2,9 +2,20 @@ body {
     background-color: skyblue;
 }
 
+h1 {
+    text-align: center;
+}
+
 h3 {
     font-size: 3em;
-    align-self: center;
+    text-align: center;
+    padding:0em;
+    margin:0em;
+}
+
+h4 {
+    text-align: center;
+    font-style: italic;
 }
 
 span {
@@ -23,11 +34,13 @@ span {
     font-size: 2.5em;
     margin-top: auto;
     opacity: .75;
+    text-align: center;
 }
 
 #skyScene {
     font-size: 2.5em;
     opacity: .75;
+    text-align: center;
 }
 
 
@@ -36,6 +49,7 @@ span {
     flex-flow: column;
     align-items: flex-end;
     background-image: url(/assets/transparentWindow.png);
+    background-position-x: center;
     background-size: cover;
     background-repeat: no-repeat;
     height: 70vh;
