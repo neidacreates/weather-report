@@ -88,58 +88,44 @@ const changeTempText = async () => {
   await wait(2000);
   currentTempElemt.textContent = state.tempText;
   conditionText.textContent = state.condition;
-  landscapeChange();
-  colorChange();
+  changeLandscapeTempColor();
   skyChangeByWeather();
 };
 
-// ----- CHANGING TEMPERATURE COLOR ----- //
-const colorChange = () => {
+// ----- CHANGING LANDSCAPE SCENE & TEMPERATURE COLOR ----- //
+const changeLandscapeTempColor = () => {
   currentTempElemt.removeAttribute('class');
   if (state.tempText >= 80) {
     currentTempElemt.classList.add('textRed');
+    state.scene = '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
   } else if (79 >= state.tempText && state.tempText >= 70) {
     currentTempElemt.classList.add('textOrange');
+    state.scene = '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
   } else if (69 >= state.tempText && state.tempText >= 60) {
     currentTempElemt.classList.add('textYellow');
+    state.scene = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
   } else if (59 >= state.tempText && state.tempText >= 50) {
     currentTempElemt.classList.add('textGreen');
+    state.scene = '🍁🍂🍁🍂🍁🍂🍁🍂🍁🍂🍁🍂🍁';
   } else {
     currentTempElemt.classList.add('textTeal');
+    state.scene = '🌲❄️🌲⛄️🌲❄️⛄️🌲🌲❄️⛄️🌲❄️';
   }
+
+  landscapeElemt.textContent = state.scene;
 };
 
 // ----- CHANGING TEMPERATURE COUNT ----- //
 const increaseTemp = () => {
   state.tempText += 1;
-  colorChange();
-  landscapeChange();
+  changeLandscapeTempColor();
   currentTempElemt.textContent = `${state.tempText}`;
 };
 
 const decreaseTemp = () => {
   state.tempText -= 1;
-  colorChange();
-  landscapeChange();
+  changeLandscapeTempColor();
   currentTempElemt.textContent = `${state.tempText}`;
-};
-
-// ----- CHANGING LANDSCAPE SCENE ----- //
-
-const landscapeChange = () => {
-  if (state.tempText >= 80) {
-    state.scene = '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
-  } else if (79 >= state.tempText && state.tempText >= 70) {
-    state.scene = '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
-  } else if (69 >= state.tempText && state.tempText >= 60) {
-    state.scene = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
-  } else if (59 >= state.tempText && state.tempText >= 50) {
-    state.scene = '🍁🍂🍁🍂🍁🍂🍁🍂🍁🍂🍁🍂🍁';
-  } else {
-    state.scene = '🌲❄️🌲⛄️🌲❄️⛄️🌲🌲❄️⛄️🌲❄️';
-  }
-
-  landscapeElemt.textContent = state.scene;
 };
 
 // ----- CHANGING SKY SCENE ----- //
