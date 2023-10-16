@@ -48,7 +48,7 @@ span {
     display: flex;
     flex-flow: column;
     align-items: flex-end;
-    background-image: url(/assets/transparentWindow.png);
+    background-image: url(weather-report/assets/transparentWindow.png);
     background-position-x: center;
     background-size: cover;
     background-repeat: no-repeat;
