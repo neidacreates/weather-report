@@ -37,7 +37,7 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const getWeather = async () => {
   await wait(1000);
   return axios
-    .get('http://127.0.0.1:5000/weather', {
+    .get('https://weather-report-proxy-server.vercel.app/weather', {
       params: {
         lat: state.lat,
         lon: state.lon,
@@ -63,7 +63,7 @@ const getWeather = async () => {
 
 const findLatitudeAndLongitude = () => {
   return axios
-    .get('http://127.0.0.1:5000/location', {
+    .get('https://weather-report-proxy-server.vercel.app/location', {
       params: {
         q: state.city,
         format: 'json',
