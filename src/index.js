@@ -1,3 +1,4 @@
+import axios from 'axios';
 'use strict';
 const currentTempElemt = document.getElementById('tempText');
 const landscapeElemt = document.getElementById('landscapeScene');
