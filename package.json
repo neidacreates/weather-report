@@ -1,5 +1,14 @@
 {
   "dependencies": {
-    "axios": "^0.27.2"
+      "axios": "^0.27.2"
+  },
+  "devDependencies": {
+      "parcel-bundler": "^1.12.5"
+  },
+  "scripts": {
+      "predeploy": "rm -rf dist && yarn run build",
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "dev": "parcel index.html ",
+      "build": "parcel build index.html --public-url /weather-report/"
   }
 }
